@@ -6,15 +6,16 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
-dt = read_csv('hw2_.csv')
+td <- read_csv('https://raw.githubusercontent.com/dashapetrova/2019_hse_data_analysis/master/hw2_Bayesian_inference/hw2_phoible.csv')
 ```
 
 ### 2.1
 ```{r pressure, echo=FALSE}
-dt %>% 
-  mutate(proportion = consonants/phonemes) %>% 
-  filter(proportion == max(proportion)) %>% 
-  select(language)
+td %>% 
+  mutate(res = consonants/phonemes) %>% 
+  filter(res == max(res)) ->
+  l
+l$language
 ```
 
 ### 2.2
