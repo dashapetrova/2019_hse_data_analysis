@@ -20,12 +20,12 @@ l$language
 
 ### 2.2
 ```{r pressure, echo=FALSE}
-a_prior=9.300246
-b_prior=4.4545
-dt %>% 
-  mutate(module = abs((consonants/phonemes)-((consonants+a_prior)/(phonemes+a_prior+b_prior)))) -> dt
-dt %>% 
-  arrange(desc(module)) %>% 
-  head() %>% 
-  select(language)
+a <-  9.300246
+b <-  4.4545
+td %>% 
+  mutate(mod = abs((consonants/phonemes)-((consonants+a)/(phonemes+a+b)))) %>% 
+  arrange(desc(mod)) %>% 
+  top_n(n=6) ->
+  result
+result$language
 ```
