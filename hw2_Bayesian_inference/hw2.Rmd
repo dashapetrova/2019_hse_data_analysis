@@ -10,7 +10,7 @@ td <- read_csv('https://raw.githubusercontent.com/dashapetrova/2019_hse_data_ana
 ```
 
 ### 2.1
-```{r pressure, echo=FALSE}
+```{r}
 td %>% 
   mutate(res = consonants/phonemes) %>% 
   filter(res == max(res)) ->
@@ -19,7 +19,7 @@ l$language
 ```
 
 ### 2.2
-```{r pressure, echo=FALSE}
+```{r}
 a <-  9.300246
 b <-  4.4545
 td %>% 
