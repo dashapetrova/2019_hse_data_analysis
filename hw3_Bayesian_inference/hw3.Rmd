@@ -1,0 +1,45 @@
+---
+title: "hw_3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+### 3.1
+
+```{r}
+td <- read_csv('https://raw.githubusercontent.com/dashapetrova/2019_hse_data_analysis/master/hw3_Bayesian_inference/hw3_phoible.csv')
+result = prod(dnorm(td$consonants, 22, 6))
+result
+```
+
+### 3.2
+
+```{r}
+td2 <- read_csv('https://raw.githubusercontent.com/agricolamz/2019_data_analysis_for_linguists/master/data/letter_frequency.csv')
+td2 %>% 
+  gather(language, prob, 1:13) %>% 
+  spread(letter, prob) %>% 
+  mutate(like_most = m*o*s*t) ->
+  td2_2
+
+data_frame(lang = td2_2$language,
+           prior = 1/length(lang),
+           likelihood = td2_2$like_most,
+           product = prior*likelihood,
+           posterior = product/sum(product)) ->
+  result_2
+
+max(result_2$posterior)
+```
+
+### 3.3
+
+```{r}
+td3 <- read_csv('https://raw.githubusercontent.com/dashapetrova/2019_hse_data_analysis/master/hw3_Bayesian_inference/hw3_task_3.csv')
+result_3 <- (td3$a[1]+33)/(td3$a[1]+33+td3$b[1]+77)
+result_3 
+```
