@@ -5,15 +5,16 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
-dat <- read_csv('https://raw.githubusercontent.com/dashapetrova/2019_hse_data_analysis/master/hw4_Advanced_Bayesian/hw4_caretta.csv')
-m_prior <- mean(dat$vowel.dur, trim = 0.1)
-s_prior <- sd(dat$vowel.dur)
 ```
 
 ### 4.1
 
 ```{r}
+library(tidyverse)
+dat <- read_csv('https://raw.githubusercontent.com/dashapetrova/2019_hse_data_analysis/master/hw4_Advanced_Bayesian/hw4_caretta.csv')
+m_prior <- mean(dat$vowel.dur, trim = 0.1)
+s_prior <- sd(dat$vowel.dur)
+
 dat %>% 
   filter(speaker == 'brs02')->
   dat2
