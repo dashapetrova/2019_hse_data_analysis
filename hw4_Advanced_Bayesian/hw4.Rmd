@@ -1,4 +1,53 @@
+---
+title: "hw4"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+dat <- read_csv('https://raw.githubusercontent.com/dashapetrova/2019_hse_data_analysis/master/hw4_Advanced_Bayesian/hw4_caretta.csv')
+m_prior <- mean(dat$vowel.dur, trim = 0.1)
+s_prior <- sd(dat$vowel.dur)
+```
+
 ### 4.1
+
+```{r}
+dat %>% 
+  filter(speaker == 'brs02')->
+  dat2
+m2 <- mean(dat2$vowel.dur, trim = 0.1)
+s2 <- sd(dat2$vowel.dur)
+
+m_post <- weighted.mean(c(m_prior, m2), c(1/s_prior, 1/s2))
+s_post <- (1/s_prior+1/s2)^(-1)
+
+data_frame(
+  speaker = 'brs02',
+  mean_post = m_post,
+  sd_post = s_post
+)
+```
 
 ### 4.2
 
+```{r}
+dat %>% 
+  filter(speaker == 'tt01')->
+  dat3
+m3 <- mean(dat3$vowel.dur, trim = 0.1)
+s3 <- sd(dat3$vowel.dur)
+
+m_post3 <- weighted.mean(c(m_prior, m3), c(1/s_prior, 1/s3))
+s_post3 <- (1/s_prior+1/s3)^(-1)
+
+low <- qnorm(.025, m_post3, s3)
+up <- qnorm(.975, m_post3, s3)
+
+data_frame(
+  speaker = 'tt01',
+  lower = low,
+  upper = up
+)
+```
